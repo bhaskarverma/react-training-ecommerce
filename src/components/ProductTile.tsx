@@ -3,15 +3,35 @@ import { Product } from "../types/products";
 
 interface ProductTileProps {
   product: Product;
+  addToCart: (product: Product) => void;
+  removeFromCart: (product: Product) => void;
+  cart: Product[];
 }
 
-function ProductTile({ product }: ProductTileProps) {
+function ProductTile({
+  product,
+  addToCart,
+  cart,
+  removeFromCart,
+}: ProductTileProps) {
   const DESCRIPTION_LENGTH = 200;
 
   const description =
     product.description.length > DESCRIPTION_LENGTH
       ? product.description.substring(0, DESCRIPTION_LENGTH) + "..."
       : product.description;
+
+  const isProductInCart = cart.some(
+    (cartProduct) => cartProduct.id === product.id
+  );
+
+  const toggleProductInCart = () => {
+    if (isProductInCart) {
+      removeFromCart(product);
+    } else {
+      addToCart(product);
+    }
+  };
 
   return (
     <div
@@ -32,6 +52,20 @@ function ProductTile({ product }: ProductTileProps) {
 
       <span>{product.title}</span>
       <div>{description}</div>
+      <div
+        style={{
+          display: "flex",
+          gap: 30,
+        }}
+      >
+        <div>{product.rating.rate}</div>
+        <div>Rs.{product.price}</div>
+      </div>
+      <div>
+        <button onClick={toggleProductInCart}>
+          {isProductInCart ? "Remove from cart" : "Add to cart"}
+        </button>
+      </div>
     </div>
     // Image at the top
     // Title
