@@ -1,16 +1,11 @@
-import NavBar from "./components/NavBar";
 import CartProvider from "./context/CartProvider";
-import Loading from "./context/Loading";
-import Products from "./components/Products";
+import HomePage from "./pages/HomePage";
 
 function App() {
   return (
-    <Loading>
-      <CartProvider>
-        <NavBar />
-        <Products />
-      </CartProvider>
-    </Loading>
+    <CartProvider>
+      <HomePage />
+    </CartProvider>
   );
 }
 

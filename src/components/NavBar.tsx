@@ -16,6 +16,7 @@ function NavBar() {
     >
       <span>My Awesome E-Commerce</span>
       <span>{cart.length} Items in Cart</span>
+      <button>View Cart</button>
     </div>
   );
 }

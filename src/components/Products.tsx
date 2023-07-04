@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Product } from "../types/products";
 import ProductTile from "./ProductTile";
+import Loading from "./Loading";
 
 function Products() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -14,16 +15,18 @@ function Products() {
   }, []);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-      }}
-    >
-      {products.map((product) => {
-        return <ProductTile key={product.id} product={product} />;
-      })}
-    </div>
+    <Loading products={products}>
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+        }}
+      >
+        {products.map((product) => {
+          return <ProductTile key={product.id} product={product} />;
+        })}
+      </div>
+    </Loading>
   );
 }
 
