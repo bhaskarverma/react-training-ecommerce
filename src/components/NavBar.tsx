@@ -1,11 +1,9 @@
-import React from "react";
-import { Product } from "../types/products";
+import React, { useContext } from "react";
+import { CartContext } from "../context/CartProvider";
 
-interface NavBarProps {
-  cart: Product[];
-}
+function NavBar() {
+  const { cart } = useContext(CartContext);
 
-function NavBar({ cart }: NavBarProps) {
   return (
     <div
       style={{

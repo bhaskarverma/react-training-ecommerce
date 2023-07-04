@@ -1,20 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Product } from "../types/products";
+import { CartContext } from "../context/CartProvider";
 
 interface ProductTileProps {
   product: Product;
-  addToCart: (product: Product) => void;
-  removeFromCart: (product: Product) => void;
-  cart: Product[];
 }
 
-function ProductTile({
-  product,
-  addToCart,
-  cart,
-  removeFromCart,
-}: ProductTileProps) {
+function ProductTile({ product }: ProductTileProps) {
   const DESCRIPTION_LENGTH = 200;
+
+  const { cart, addToCart, removeFromCart } = useContext(CartContext);
 
   const description =
     product.description.length > DESCRIPTION_LENGTH
