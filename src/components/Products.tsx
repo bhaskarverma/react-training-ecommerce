@@ -23,7 +23,7 @@ function Products() {
         }}
       >
         {products.map((product) => {
-          return <ProductTile key={product.id} product={product} />;
+          return <ProductTile key={product.id} product={product} showButton />;
         })}
       </div>
     </Loading>

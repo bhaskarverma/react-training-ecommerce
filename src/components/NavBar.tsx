@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
-import { CartContext } from "../context/CartProvider";
+import React from "react";
+import { useCart } from "../context/CartProvider";
+import { Link } from "react-router-dom";
 
 function NavBar() {
-  const { cart } = useContext(CartContext);
+  const { cart } = useCart();
 
   return (
     <div
@@ -16,7 +17,9 @@ function NavBar() {
     >
       <span>My Awesome E-Commerce</span>
       <span>{cart.length} Items in Cart</span>
-      <button>View Cart</button>
+      <Link to="/cart">
+        <button>Cart</button>
+      </Link>
     </div>
   );
 }

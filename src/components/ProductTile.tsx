@@ -1,15 +1,17 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Product } from "../types/products";
-import { CartContext } from "../context/CartProvider";
+import { useCart } from "../context/CartProvider";
+import { Link } from "react-router-dom";
 
 interface ProductTileProps {
   product: Product;
+  showButton?: boolean;
 }
 
-function ProductTile({ product }: ProductTileProps) {
+function ProductTile({ product, showButton }: ProductTileProps) {
   const DESCRIPTION_LENGTH = 200;
 
-  const { cart, addToCart, removeFromCart } = useContext(CartContext);
+  const { cart, addToCart, removeFromCart } = useCart();
 
   const description =
     product.description.length > DESCRIPTION_LENGTH
@@ -45,7 +47,9 @@ function ProductTile({ product }: ProductTileProps) {
         <img src={product.image} alt={product.title} height={50} width={50} />
       </div>
 
-      <span>{product.title}</span>
+      <span>
+        <Link to={`/product/${product.id}`}>{product.title}</Link>
+      </span>
       <div>{description}</div>
       <div
         style={{
@@ -56,11 +60,13 @@ function ProductTile({ product }: ProductTileProps) {
         <div>{product.rating.rate}</div>
         <div>Rs.{product.price}</div>
       </div>
-      <div>
-        <button onClick={toggleProductInCart}>
-          {isProductInCart ? "Remove from cart" : "Add to cart"}
-        </button>
-      </div>
+      {showButton && (
+        <div>
+          <button onClick={toggleProductInCart}>
+            {isProductInCart ? "Remove from cart" : "Add to cart"}
+          </button>
+        </div>
+      )}
     </div>
     // Image at the top
     // Title

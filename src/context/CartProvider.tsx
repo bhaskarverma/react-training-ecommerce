@@ -1,4 +1,4 @@
-import React, { ReactNode, createContext, useState } from "react";
+import React, { ReactNode, createContext, useContext, useState } from "react";
 import CartContextType from "../types/cart_context";
 import { Product } from "../types/products";
 
@@ -12,6 +12,10 @@ const CartContext = createContext<CartContextType>(defaultContext);
 
 interface CartProviderProps {
   children: ReactNode;
+}
+
+function useCart() {
+  return useContext(CartContext);
 }
 
 function CartProvider({ children }: CartProviderProps) {
@@ -34,4 +38,4 @@ function CartProvider({ children }: CartProviderProps) {
 }
 
 export default CartProvider;
-export { CartContext };
+export { useCart };
